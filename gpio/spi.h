@@ -43,7 +43,11 @@ extern "C" {
 #define BCM_SPI_CS_CS_10	0x00000002
 #define BCM_SPI_CS_CS_01	0x00000001
 
-#define BCM_APB_CLK			(250000000)
+#if (BCM_PERI_ADRS_BASE == BCM_2837_PERI_ADRS_BASE)
+	#define BCM_APB_CLK		(250000000)
+#elif (BCM_PERI_ADRS_BASE == BCM_2711_PERI_ADRS_BASE)
+	#define BCM_APB_CLK		(200000000)
+#endif
 #define BCM_SPI_CLK_MAX		(BCM_APB_CLK >> 1)
 
 extern void spi_init(int mode, int hz);
